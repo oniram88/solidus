@@ -1,4 +1,18 @@
-## Solidus 1.4.0 (master, unreleased)
+## Solidus 1.4.0 (unreleased)
+
+*   Make some 'wallet' behavior configurable
+
+    NOTE: `Order#persist_user_credit_card` has been renamed to
+    `Order#add_payment_sources_to_wallet`. If you are overriding
+    `persist_user_credit_card` you need to update your code.
+
+    The following extension points have been added for customizing 'wallet'
+    behavior.
+
+    * Spree::Config.add_payment_sources_to_wallet_class
+    * Spree::Config.default_payment_builder_class
+
+    https://github.com/solidusio/solidus/pull/1086
 
 *   Backend: UI, Remove icons from buttons and tabs
 
@@ -35,7 +49,13 @@
 
 *   Removed "Clear cache" button from the admin [#1275](https://github.com/solidusio/solidus/pull/1275)
 
-## Solidus 1.3.0 (unreleased)
+*   Adjustments and totals are no longer updated when saving a Shipment or LineItem.
+
+    Previously adjustments and total columns were updated after saving a Shipment or LineItem.
+    This was unnecessary since it didn't update the order totals, and running
+    order.update! would recalculate the adjustments and totals again.
+
+## Solidus 1.3.0 (2016-06-22)
 
 *   Order now requires a `store_id` in validations
 
